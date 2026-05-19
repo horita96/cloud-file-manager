@@ -54,12 +54,14 @@
 ## 📂 ディレクトリ構造（予定）
 ```text
 src/
-├── main/
-│   └── java/
-│       ├── Main.java            # アプリケーションの実行（司令塔）
-│       ├── storage/
-│       │   ├── FileStorage.java  # 保存ルールのインターフェース（共通規格）
-│       │   ├── LocalStorage.java # ローカル保存用の実装クラス
-│       │   └── S3Storage.java    # AWS S3保存用の実装クラス
-│       └── utils/
-│           └── ImageConverter.java # 画像変換（PNG->JPG）等の共通部品
+└── main/
+    └── java/
+        └── com/
+            └── horita/
+                ├── Main.java         # アプリケーションの実行（司令塔）
+                ├── storage/          # データの保存担当
+                │   ├── FileStorage.java   # 保存ルールのインターフェース（共通規格）
+                │   ├── LocalStorage.java  # ローカル保存用の実装クラス
+                │   └── S3Storage.java     # AWS S3保存用の実装クラス
+                └── utils/            # 便利ツール担当
+                    └── ImageConverter.java # 画像変換（PNG->JPG）等の共通部品
