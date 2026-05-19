@@ -24,7 +24,7 @@
 
 ## 🛠️ 技術スタック
 
-- **言語**: Java 17 (Amazon Corretto)
+- **言語**: Java 21 (Amazon Corretto)
 - **インフラ**: AWS (S3, IAM, AWS CLI)
 - **開発環境**: VS Code
 - **バージョン管理**: Git / GitHub
