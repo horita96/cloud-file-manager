@@ -1,7 +1,31 @@
 package com.horita.storage;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import com.horita.storage.model.FileMetaData;
+import com.horita.storage.service.LocalStorageService;
+import com.horita.storage.service.StorageService;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("こんにちは、ストレージ管理システムへようこそ！");
+        // try-with-resources: 抜けた時に自動で close される
+        try (Scanner scanner = new Scanner(System.in)) {
+            StorageService storageService = new LocalStorageService();
+
+            System.out.println("--- クラウドファイルマネージャー起動 ---");
+
+            System.out.println("ファイル名を入力してください：");
+            String name = scanner.nextLine();
+
+            System.out.println("ファイルサイズを入力してください（バイト）：");
+            long size = scanner.nextLong();
+
+            FileMetaData file = new FileMetaData(name, size);
+            storageService.save(file);
+
+        } catch (InputMismatchException e) {
+            System.out.println("【エラー】ファイルサイズには半角数字を入力してください。");
+        }
+        // try-with-resources のおかげで finally ブロックが不要になる
     }
 }
