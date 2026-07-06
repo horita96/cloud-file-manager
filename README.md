@@ -118,4 +118,4 @@ cloud-file-manager/
                         │   └── FileMetaData.java     # ファイルの情報をカプセル化するクラス
                         │
                         └── util/                     # 📁 共通の便利ツールをまとめる階層
-                            └── FileSizeLimiter.java  # サイズ確認・制限のクラス
+                            └── StorageUtil.java      # サイズ確認・制限等のフォーマットチェッククラス
