@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.horita.storage.model.FileMetaData;
 import com.horita.storage.service.LocalStorageService;
 import com.horita.storage.service.StorageService;
+import com.horita.storage.util.StorageUtil;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,6 +20,12 @@ public class Main {
 
             System.out.println("ファイルサイズを入力してください（バイト）：");
             long size = scanner.nextLong();
+
+            // staticメソッドの呼び出し：3MBチェックのバリデーション
+            if (!StorageUtil.isValidSize(size)) {
+                System.out.println("【エラー】3MB（3,145,728バイト）を越えるファイルは保存できません。");
+                return; // 異常値なのでここでプログラムを安全に終了させる
+            }
 
             FileMetaData file = new FileMetaData(name, size);
             storageService.save(file);
