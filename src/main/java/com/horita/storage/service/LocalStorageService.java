@@ -13,7 +13,7 @@ public class LocalStorageService implements StorageService {
         String formattedSize = StorageUtil.formatSize(file.getFileSize());
 
         System.out.println("[ローカル] ファイル 「" + file.getFileName() + "」 をPCに保存しました。");
-        System.out.println("[ローカル] 保存サイズ： " + formattedSize); // 見やすい表示に変更
+        System.out.println("[ローカル] 保存サイズ: " + formattedSize); // 見やすい表示に変更
     }
 
 }
