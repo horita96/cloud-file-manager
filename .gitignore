@@ -1,3 +1,4 @@
 /target/
 *.class
 .sts4-cache/
+local_storage/

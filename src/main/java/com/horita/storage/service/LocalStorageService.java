@@ -2,18 +2,40 @@ package com.horita.storage.service;
 
 import com.horita.storage.model.FileMetaData;
 import com.horita.storage.util.StorageUtil;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 // implements で 「StorageServiceのルールに従う」と宣言
 public class LocalStorageService implements StorageService {
+
+    private static final String STORAGE_DIR = "./local_storage";
     
-    // 看板で決めたルールを具体的に実装（オーバーライド）
     @Override
     public void save(FileMetaData file) {
-        // StorageUtil.formatSize を使って、バイトから適切な単位（KBやMB）へ変換
-        String formattedSize = StorageUtil.formatSize(file.getFileSize());
+        System.out.println("[ローカル] 保存処理を開始します．．．");
 
-        System.out.println("[ローカル] ファイル 「" + file.getFileName() + "」 をPCに保存しました。");
-        System.out.println("[ローカル] 保存サイズ: " + formattedSize); // 見やすい表示に変更
+        try {
+            Path dirPath = Paths.get(STORAGE_DIR);
+            if (!Files.exists(dirPath)) {
+                Files.createDirectories(dirPath);
+            }
+
+            Path filePath = dirPath.resolve(file.getFileName());
+
+            // StorageUtil を使ってバイト数を整形（KB、MB表示へ）
+            String formatttedSize = StorageUtil.formatSize(file.getFileSize());
+            String content = "Local Storage Data: " + file.getFileName() + "（Size; " + formatttedSize + "）";
+
+            Files.writeString(filePath, content);
+
+            System.out.println("[ローカル] フォルダ[" + STORAGE_DIR + "」へ「" + file.getFileName() + "」を正常に保存しました！" );
+            System.out.println("[ローカル] 保存サイズ: " + formatttedSize);
+
+        } catch (IOException e) {
+            System.out.println("[エラー] ローカルへの保存に失敗しました: " + e.getMessage());
+        }
     }
 
 }
